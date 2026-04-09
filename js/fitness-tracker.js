@@ -89,6 +89,12 @@
 							{ weight: 90, reps: 12 },
 							{ weight: 130, reps: 12 }
 						]
+					},
+					{
+						name: 'Ab Crunch Machine',
+						sets: [
+							{ weight: 80, reps: 20 }
+						]
 					}
 				]
 			};
