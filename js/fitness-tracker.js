@@ -63,6 +63,24 @@
 							{ weight: 275, reps: 6 },
 							{ weight: 295, reps: 2 }
 						]
+					},
+					{
+						name: 'Donkey Kicks (Machine) - superset w/ Leg Extension',
+						sets: [
+							{ weight: 70, reps: 12 },
+							{ weight: 90, reps: 10 },
+							{ weight: 110, reps: 10 },
+							{ weight: 110, reps: 8 }
+						]
+					},
+					{
+						name: 'Leg Extension - superset w/ Donkey Kicks',
+						sets: [
+							{ weight: 90, reps: 12 },
+							{ weight: 110, reps: 10 },
+							{ weight: 130, reps: 10 },
+							{ weight: 130, reps: 8 }
+						]
 					}
 				]
 			};
