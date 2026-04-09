@@ -53,6 +53,16 @@
 							{ weight: 185, reps: 5 },
 							{ weight: 185, reps: 8 }
 						]
+					},
+					{
+						name: 'Sumo Deadlift',
+						sets: [
+							{ weight: 45, reps: 10 },
+							{ weight: 135, reps: 7 },
+							{ weight: 225, reps: 6 },
+							{ weight: 275, reps: 6 },
+							{ weight: 295, reps: 2 }
+						]
 					}
 				]
 			};
