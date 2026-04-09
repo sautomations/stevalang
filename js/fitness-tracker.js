@@ -48,9 +48,10 @@
 					{
 						name: 'Squat',
 						sets: [
-							{ weight: 45, reps: '' },
-							{ weight: 135, reps: '' },
-							{ weight: 185, reps: '' }
+							{ weight: 45, reps: 10 },
+							{ weight: 135, reps: 8 },
+							{ weight: 185, reps: 5 },
+							{ weight: 185, reps: 8 }
 						]
 					}
 				]
