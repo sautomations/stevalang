@@ -81,6 +81,13 @@
 							{ weight: 130, reps: 10 },
 							{ weight: 130, reps: 10 }
 						]
+					},
+					{
+						name: 'Seated Leg Curl',
+						sets: [
+							{ weight: 70, reps: 12 },
+							{ weight: 90, reps: 12 }
+						]
 					}
 				]
 			};
