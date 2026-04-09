@@ -96,6 +96,12 @@
 							{ weight: 80, reps: 20 },
 							{ weight: 80, reps: 20 }
 						]
+					},
+					{
+						name: 'Leg Raises',
+						sets: [
+							{ weight: 0, reps: 20 }
+						]
 					}
 				]
 			};
