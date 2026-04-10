@@ -105,6 +105,321 @@
 	letter-spacing: 0.15rem;
 }
 
+/* Challenge Prep Section */
+#challenge-prep {
+	padding: 4rem 0;
+	background: #fafafa;
+}
+
+.challenge-card {
+	max-width: 900px;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 12px;
+	padding: 3rem;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+	border-top: 4px solid #e74c3c;
+}
+
+.challenge-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin-bottom: 3rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid #eee;
+}
+
+.challenge-header h2 {
+	font-size: 2.8rem;
+	margin: 0 0 0.5rem;
+	color: #0d0a0b;
+}
+
+.challenge-date {
+	font-size: 1.4rem;
+	color: #888;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+	margin: 0;
+}
+
+.challenge-countdown {
+	text-align: center;
+	background: #0d0a0b;
+	color: #fff;
+	padding: 1.5rem 2.5rem;
+	border-radius: 8px;
+	min-width: 140px;
+}
+
+.countdown-number {
+	display: block;
+	font-size: 3.6rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.countdown-label {
+	display: block;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+	opacity: 0.7;
+	margin-top: 0.5rem;
+}
+
+.progress-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+	gap: 2rem;
+	margin-bottom: 2.5rem;
+}
+
+.progress-item {
+	background: #f8f8f8;
+	padding: 1.8rem;
+	border-radius: 8px;
+	position: relative;
+}
+
+.progress-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.progress-name {
+	font-size: 1.6rem;
+	font-weight: 600;
+	color: #0d0a0b;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+}
+
+.progress-values {
+	font-size: 1.4rem;
+	color: #555;
+}
+
+.progress-values .current-val {
+	color: #0d0a0b;
+	font-weight: 700;
+}
+
+.progress-values .target-val {
+	color: #e74c3c;
+	font-weight: 700;
+}
+
+.progress-bar {
+	width: 100%;
+	height: 10px;
+	background: #e0e0e0;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: 0.8rem;
+}
+
+.progress-fill {
+	height: 100%;
+	background: linear-gradient(90deg, #27ae60, #2ecc71);
+	border-radius: 5px;
+	transition: width 0.6s ease;
+	width: 0%;
+}
+
+.progress-item[data-complete="true"] .progress-fill {
+	background: linear-gradient(90deg, #f39c12, #e74c3c);
+}
+
+.progress-percent {
+	font-size: 1.2rem;
+	color: #888;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	font-weight: 600;
+}
+
+.challenge-phase {
+	text-align: center;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+	font-size: 1.4rem;
+}
+
+.phase-label {
+	color: #888;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	margin-right: 1rem;
+}
+
+.phase-name {
+	color: #0d0a0b;
+	font-weight: 700;
+}
+
+/* Training Schedule */
+#training-schedule {
+	padding: 6rem 0;
+}
+
+#training-schedule h2 {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	color: #313131;
+	text-align: center;
+}
+
+.schedule-intro {
+	text-align: center;
+	color: #888;
+	font-size: 1.5rem;
+	margin-bottom: 4rem;
+}
+
+#schedule-container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.week-block {
+	margin-bottom: 3rem;
+	background: #fff;
+	border-radius: 8px;
+	padding: 2rem;
+	border-left: 4px solid #ccc;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.week-block.current {
+	border-left-color: #e74c3c;
+	box-shadow: 0 4px 16px rgba(231, 76, 60, 0.15);
+}
+
+.week-block.past {
+	opacity: 0.6;
+	border-left-color: #27ae60;
+}
+
+.week-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.week-title {
+	font-size: 1.8rem;
+	font-weight: 700;
+	color: #0d0a0b;
+	margin: 0;
+}
+
+.week-phase {
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+	color: #888;
+	padding: 0.3rem 1rem;
+	background: #f0f0f0;
+	border-radius: 20px;
+}
+
+.week-block.current .week-phase {
+	background: #e74c3c;
+	color: #fff;
+}
+
+.session-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 1.5rem;
+}
+
+.session-card {
+	background: #fafafa;
+	padding: 1.5rem;
+	border-radius: 6px;
+	border-left: 3px solid #d5d5d5;
+}
+
+.session-card.completed {
+	border-left-color: #27ae60;
+	background: #f0f9f4;
+}
+
+.session-day {
+	font-size: 1.2rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	color: #888;
+	margin-bottom: 0.5rem;
+}
+
+.session-name {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #0d0a0b;
+	margin-bottom: 1rem;
+}
+
+.session-exercises {
+	font-size: 1.3rem;
+	color: #555;
+	line-height: 1.5;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.session-exercises li {
+	padding: 0.3rem 0;
+	border-bottom: 1px dashed #eee;
+}
+
+.session-exercises li:last-child {
+	border-bottom: none;
+}
+
+.session-status {
+	display: inline-block;
+	margin-top: 1rem;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	color: #888;
+}
+
+.session-card.completed .session-status {
+	color: #27ae60;
+	font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+	.challenge-header {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.challenge-countdown {
+		align-self: center;
+	}
+
+	.progress-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* Log Workout Section */
 #log-workout {
 	padding: 6rem 0;
