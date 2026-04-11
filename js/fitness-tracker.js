@@ -254,6 +254,14 @@
 						sets: [
 							{ weight: 0, reps: 12 }
 						]
+					},
+					{
+						name: 'Lateral Raises',
+						sets: [
+							{ weight: 15, reps: 10 },
+							{ weight: 15, reps: 10 },
+							{ weight: 15, reps: 10 }
+						]
 					}
 				]
 			};
