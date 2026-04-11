@@ -199,7 +199,27 @@
 					}
 				]
 			};
+
+			var secondWorkout = {
+				id: '1744329600000',
+				date: '2026-04-11',
+				type: 'Upper Body',
+				notes: 'Unscheduled Saturday session. Moderate intensity to preserve CNS for Monday pull day.',
+				exercises: [
+					{
+						name: 'Incline Chest Press (Plate Machine)',
+						sets: [
+							{ weight: 12, reps: 20 },
+							{ weight: 102, reps: 10 },
+							{ weight: 192, reps: 6 },
+							{ weight: 242, reps: 5 }
+						]
+					}
+				]
+			};
+
 			workouts.push(firstWorkout);
+			workouts.push(secondWorkout);
 			saveWorkouts(workouts);
 		}
 	}
