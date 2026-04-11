@@ -245,7 +245,8 @@
 						name: 'Cable Preacher Ab Crunch',
 						sets: [
 							{ weight: 70, reps: 20 },
-							{ weight: 100, reps: 20 }
+							{ weight: 100, reps: 20 },
+							{ weight: 100, reps: 10 }
 						]
 					}
 				]
