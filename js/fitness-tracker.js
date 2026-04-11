@@ -231,6 +231,13 @@
 							{ weight: 0, reps: 20 },
 							{ weight: 0, reps: 30 }
 						]
+					},
+					{
+						name: 'Shoulder Press (Machine)',
+						sets: [
+							{ weight: 80, reps: 8 },
+							{ weight: 100, reps: 6 }
+						]
 					}
 				]
 			};
