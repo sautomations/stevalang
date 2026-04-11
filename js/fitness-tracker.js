@@ -227,7 +227,8 @@
 					{
 						name: 'Dead Hang',
 						sets: [
-							{ weight: 0, reps: 30 }
+							{ weight: 0, reps: 30 },
+							{ weight: 0, reps: 20 }
 						]
 					}
 				]
