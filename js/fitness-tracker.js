@@ -220,7 +220,14 @@
 						sets: [
 							{ weight: 145, reps: 6 },
 							{ weight: 185, reps: 3 },
-							{ weight: 195, reps: 4 }
+							{ weight: 195, reps: 4 },
+							{ weight: 185, reps: 5 }
+						]
+					},
+					{
+						name: 'Dead Hang',
+						sets: [
+							{ weight: 0, reps: 30 }
 						]
 					}
 				]
