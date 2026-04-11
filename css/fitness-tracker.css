@@ -797,6 +797,91 @@
 	font-size: 1.8rem;
 }
 
+/* Rest Timer Widget */
+#rest-timer {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 220px;
+	background: #0d0a0b;
+	color: #fff;
+	border-radius: 12px;
+	padding: 1.5rem;
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+	z-index: 9998;
+	text-align: center;
+	transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#rest-timer.rest-timer-running {
+	background: #27ae60;
+}
+
+#rest-timer.rest-timer-done {
+	background: #e74c3c;
+	animation: timerPulse 0.5s ease infinite alternate;
+}
+
+@keyframes timerPulse {
+	from { transform: scale(1); }
+	to { transform: scale(1.05); }
+}
+
+.timer-display {
+	font-size: 3.6rem;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 1rem;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.1rem;
+}
+
+.timer-controls {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 0.8rem;
+}
+
+.timer-controls button {
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	padding: 0.6rem 1rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: inherit;
+	transition: background 0.2s ease;
+}
+
+.timer-controls button:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.timer-controls button#timer-stop {
+	background: rgba(231, 76, 60, 0.3);
+	border-color: rgba(231, 76, 60, 0.5);
+}
+
+.timer-label {
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+	opacity: 0.7;
+}
+
+@media screen and (max-width: 480px) {
+	#rest-timer {
+		bottom: 10px;
+		right: 10px;
+		left: 10px;
+		width: auto;
+	}
+}
+
 /* Success Message */
 .success-message {
 	position: fixed;

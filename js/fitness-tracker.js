@@ -639,6 +639,150 @@
 		}, 2500);
 	}
 
+	// ---- Rest Timer ----
+
+	var timerState = {
+		interval: null,
+		remaining: 120,
+		running: false,
+		audioCtx: null
+	};
+
+	function formatTimerTime(seconds) {
+		var m = Math.floor(seconds / 60);
+		var s = seconds % 60;
+		return m + ':' + (s < 10 ? '0' + s : s);
+	}
+
+	function playBeep() {
+		try {
+			if (!timerState.audioCtx) {
+				var AC = window.AudioContext || window.webkitAudioContext;
+				if (!AC) return;
+				timerState.audioCtx = new AC();
+			}
+			var ctx = timerState.audioCtx;
+			// Three beeps
+			for (var i = 0; i < 3; i++) {
+				var osc = ctx.createOscillator();
+				var gain = ctx.createGain();
+				osc.type = 'sine';
+				osc.frequency.value = 880;
+				gain.gain.value = 0.3;
+				osc.connect(gain);
+				gain.connect(ctx.destination);
+				var startTime = ctx.currentTime + (i * 0.35);
+				osc.start(startTime);
+				osc.stop(startTime + 0.2);
+			}
+		} catch (e) { /* ignore */ }
+	}
+
+	function vibrate() {
+		if (navigator.vibrate) {
+			navigator.vibrate([300, 100, 300, 100, 300]);
+		}
+	}
+
+	function updateTimerDisplay() {
+		var el = document.getElementById('timer-time');
+		if (el) el.textContent = formatTimerTime(timerState.remaining);
+	}
+
+	function startRestTimer(seconds) {
+		stopRestTimer();
+		timerState.remaining = seconds;
+		timerState.running = true;
+
+		var widget = document.getElementById('rest-timer');
+		var label = document.getElementById('timer-label');
+		widget.className = 'rest-timer-running';
+		label.textContent = 'Rest — Go!';
+
+		updateTimerDisplay();
+
+		timerState.interval = setInterval(function() {
+			timerState.remaining--;
+			updateTimerDisplay();
+			if (timerState.remaining <= 0) {
+				finishRestTimer();
+			}
+		}, 1000);
+	}
+
+	function finishRestTimer() {
+		clearInterval(timerState.interval);
+		timerState.interval = null;
+		timerState.running = false;
+		timerState.remaining = 0;
+
+		var widget = document.getElementById('rest-timer');
+		var label = document.getElementById('timer-label');
+		widget.className = 'rest-timer-done';
+		label.textContent = 'Rest Complete!';
+		updateTimerDisplay();
+
+		playBeep();
+		vibrate();
+
+		// Auto-reset to idle after 10 seconds
+		setTimeout(function() {
+			if (!timerState.running) {
+				widget.className = 'rest-timer-idle';
+				label.textContent = 'Rest Timer';
+				timerState.remaining = 120;
+				updateTimerDisplay();
+			}
+		}, 10000);
+	}
+
+	function stopRestTimer() {
+		if (timerState.interval) {
+			clearInterval(timerState.interval);
+			timerState.interval = null;
+		}
+		timerState.running = false;
+		timerState.remaining = 120;
+
+		var widget = document.getElementById('rest-timer');
+		var label = document.getElementById('timer-label');
+		if (widget) {
+			widget.className = 'rest-timer-idle';
+			label.textContent = 'Rest Timer';
+			updateTimerDisplay();
+		}
+	}
+
+	function initTimer() {
+		updateTimerDisplay();
+		document.getElementById('timer-start-2').addEventListener('click', function() {
+			startRestTimer(120);
+		});
+		document.getElementById('timer-start-3').addEventListener('click', function() {
+			startRestTimer(180);
+		});
+		document.getElementById('timer-start-90').addEventListener('click', function() {
+			startRestTimer(90);
+		});
+		document.getElementById('timer-stop').addEventListener('click', function() {
+			stopRestTimer();
+		});
+
+		// Auto-start 2 min timer when user fills in a set (weight + reps)
+		document.addEventListener('change', function(e) {
+			if (e.target && (e.target.classList.contains('set-weight') || e.target.classList.contains('set-reps'))) {
+				var row = e.target.closest('.set-row');
+				if (row) {
+					var w = row.querySelector('.set-weight').value;
+					var r = row.querySelector('.set-reps').value;
+					if (w && r) {
+						startRestTimer(120);
+					}
+				}
+			}
+		});
+	}
+
 	// ---- Form Handling ----
 
 	function collectFormData() {
@@ -704,6 +848,9 @@
 
 		// Add first empty exercise entry
 		addExerciseEntry();
+
+		// Initialize rest timer widget
+		initTimer();
 
 		// Show/hide custom type field
 		document.getElementById('workout-type').addEventListener('change', function() {
