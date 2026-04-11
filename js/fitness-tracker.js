@@ -219,7 +219,8 @@
 						name: 'Flat Bench Press',
 						sets: [
 							{ weight: 145, reps: 6 },
-							{ weight: 185, reps: 3 }
+							{ weight: 185, reps: 3 },
+							{ weight: 195, reps: 4 }
 						]
 					}
 				]
