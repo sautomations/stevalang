@@ -238,6 +238,12 @@
 							{ weight: 80, reps: 8 },
 							{ weight: 100, reps: 6 }
 						]
+					},
+					{
+						name: 'Seated DB Shoulder Press',
+						sets: [
+							{ weight: 60, reps: 3 }
+						]
 					}
 				]
 			};
