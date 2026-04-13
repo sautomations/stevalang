@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="css/fitness-tracker.css">
 
 	<script src="js/modernizr.js"></script>
+	<script src="js/auth-guard.js"></script>
 </head>
 
 <body id="top">
@@ -27,6 +28,7 @@
 					<ul class="main-navigation">
 						<li><a href="index.html" title="">Home</a></li>
 						<li class="current"><a href="fitness-tracker.html" title="">Fitness Tracker</a></li>
+						<li><a href="#" id="logout-btn" title="">Logout</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -267,6 +269,13 @@
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/fitness-tracker.js"></script>
+	<script>
+		document.getElementById('logout-btn').addEventListener('click', function(e) {
+			e.preventDefault();
+			fetch('/api/logout', { method: 'POST', credentials: 'include' })
+				.finally(function() { window.location.replace('/login.html'); });
+		});
+	</script>
 </body>
 
 </html>
