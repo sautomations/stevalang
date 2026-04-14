@@ -289,8 +289,22 @@
 				]
 			};
 
+			var thirdWorkout = {
+				id: '1744588800000',
+				date: '2026-04-14',
+				type: 'Upper Body',
+				notes: 'Tuesday session. Back and pull focus.',
+				exercises: [
+					{
+						name: 'Lat Pulldown (Cable Machine)',
+						sets: []
+					}
+				]
+			};
+
 			workouts.push(firstWorkout);
 			workouts.push(secondWorkout);
+			workouts.push(thirdWorkout);
 			saveWorkouts(workouts);
 		}
 	}
