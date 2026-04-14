@@ -262,6 +262,12 @@
 							{ weight: 15, reps: 10 },
 							{ weight: 15, reps: 10 }
 						]
+					},
+					{
+						name: 'Lat Pulldown (Cable Machine)',
+						sets: [
+							{ weight: 120, reps: 12 }
+						]
 					}
 				]
 			};
