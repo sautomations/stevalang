@@ -278,6 +278,12 @@
 							{ weight: 0, reps: 6 },
 							{ weight: 0, reps: 6 }
 						]
+					},
+					{
+						name: 'Face Pulls',
+						sets: [
+							{ weight: 70, reps: 12 }
+						]
 					}
 				]
 			};
