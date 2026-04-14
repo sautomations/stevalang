@@ -266,7 +266,17 @@
 					{
 						name: 'Lat Pulldown (Cable Machine)',
 						sets: [
-							{ weight: 120, reps: 12 }
+							{ weight: 120, reps: 12 },
+							{ weight: 140, reps: 10 },
+							{ weight: 140, reps: 10 }
+						]
+					},
+					{
+						name: 'Wide Grip Pull-Ups',
+						sets: [
+							{ weight: 0, reps: 6 },
+							{ weight: 0, reps: 6 },
+							{ weight: 0, reps: 6 }
 						]
 					}
 				]
