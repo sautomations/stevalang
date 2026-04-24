@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin | YouAreVeganFit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .header span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    a.logout {
+      font-size: 13px;
+      color: #e07070;
+      text-decoration: none;
+      margin-left: 16px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #ccc;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 14px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: #5a9e5a;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary {
+      background: #4a8a4a;
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #5a9e5a; }
+
+    .btn-danger {
+      background: #5a2a2a;
+      color: #e07070;
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+
+    .btn-danger:hover { background: #6a3a3a; }
+
+    .btn-warning {
+      background: #4a3a1a;
+      color: #e0b070;
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+
+    .btn-warning:hover { background: #5a4a2a; }
+
+    .msg {
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .msg.visible { display: block; }
+    .msg.success { background: #1a2a1a; border: 1px solid #3a6a3a; color: #7ac47a; }
+    .msg.error { background: #2a1a1a; border: 1px solid #5a2a2a; color: #e07070; }
+
+    /* Users table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+      padding: 0 12px 12px 0;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    td {
+      padding: 14px 12px 14px 0;
+      border-bottom: 1px solid #1e1e1e;
+      vertical-align: middle;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .badge-admin { background: #2a3a2a; color: #7ac47a; }
+    .badge-client { background: #2a2a3a; color: #7a9ac4; }
+    .badge-inactive { background: #2a2a2a; color: #666; }
+
+    .actions { display: flex; gap: 8px; }
+
+    .empty { color: #555; font-size: 14px; padding: 20px 0; }
+
+    #loading { color: #555; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>YouAreVeganFit — Admin</h1>
+    <div>
+      <span id="logged-in-as"></span>
+      <a class="logout" href="#" id="logout-btn">Logout</a>
+    </div>
+  </div>
+
+  <!-- Add User -->
+  <div class="card">
+    <h2>Add New User</h2>
+    <div class="msg" id="add-msg"></div>
+    <form id="add-user-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="new-username">Username</label>
+          <input type="text" id="new-username" placeholder="e.g. johndoe" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="new-password">Password</label>
+          <input type="password" id="new-password" placeholder="Min 8 characters" required autocomplete="new-password">
+        </div>
+        <div class="form-group" style="max-width:140px">
+          <label for="new-role">Role</label>
+          <select id="new-role">
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Add User</button>
+    </form>
+  </div>
+
+  <!-- Users List -->
+  <div class="card">
+    <h2>All Users</h2>
+    <div class="msg" id="list-msg"></div>
+    <div id="loading">Loading users…</div>
+    <table id="users-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="users-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // ---- Auth check (admin only) ----
+  fetch('/api/verify', { credentials: 'include' })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.authenticated) return window.location.replace('/login.html');
+      if (data.role !== 'admin') return window.location.replace('/fitness-tracker.html');
+      document.getElementById('logged-in-as').textContent = data.username;
+      loadUsers();
+    })
+    .catch(() => window.location.replace('/login.html'));
+
+  // ---- Logout ----
+  document.getElementById('logout-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    fetch('/api/logout', { method: 'POST', credentials: 'include' })
+      .finally(() => window.location.replace('/login.html'));
+  });
+
+  // ---- Load users ----
+  function loadUsers() {
+    fetch('/api/admin/users', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        const table = document.getElementById('users-table');
+        const tbody = document.getElementById('users-tbody');
+        tbody.innerHTML = '';
+
+        if (!data.users || data.users.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" class="empty">No users found.</td></tr>';
+        } else {
+          data.users.forEach(u => tbody.appendChild(renderUserRow(u)));
+        }
+        table.style.display = 'table';
+      })
+      .catch(() => showMsg('list-msg', 'error', 'Failed to load users.'));
+  }
+
+  function renderUserRow(u) {
+    const tr = document.createElement('tr');
+    const roleBadge = u.role === 'admin' ? 'badge-admin' : 'badge-client';
+    const statusBadge = u.active ? '' : 'badge-inactive';
+    const statusText = u.active ? 'Active' : 'Inactive';
+    const created = u.created_at ? u.created_at.split('T')[0] : '—';
+
+    tr.innerHTML = `
+      <td>${escHtml(u.username)}</td>
+      <td><span class="badge ${roleBadge}">${escHtml(u.role)}</span></td>
+      <td><span class="badge ${statusBadge}">${statusText}</span></td>
+      <td>${created}</td>
+      <td>
+        <div class="actions">
+          ${u.active
+            ? `<button class="btn btn-warning" onclick="toggleUser('${escHtml(u.username)}', false)">Deactivate</button>`
+            : `<button class="btn btn-primary" style="font-size:12px;padding:6px 14px" onclick="toggleUser('${escHtml(u.username)}', true)">Activate</button>`
+          }
+          <button class="btn btn-danger" onclick="deleteUser('${escHtml(u.username)}')">Delete</button>
+        </div>
+      </td>`;
+    return tr;
+  }
+
+  // ---- Add user ----
+  document.getElementById('add-user-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('new-username').value.trim();
+    const password = document.getElementById('new-password').value;
+    const role = document.getElementById('new-role').value;
+
+    if (password.length < 8) {
+      showMsg('add-msg', 'error', 'Password must be at least 8 characters.');
+      return;
+    }
+
+    fetch('/api/admin/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ username, password, role })
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
+          showMsg('add-msg', 'success', `User "${username}" created successfully.`);
+          document.getElementById('add-user-form').reset();
+          loadUsers();
+        } else {
+          showMsg('add-msg', 'error', data.error || 'Failed to create user.');
+        }
+      })
+      .catch(() => showMsg('add-msg', 'error', 'Network error.'));
+  });
+
+  // ---- Toggle active ----
+  function toggleUser(username, active) {
+    fetch('/api/admin/users/' + encodeURIComponent(username), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ active })
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) loadUsers();
+        else showMsg('list-msg', 'error', data.error || 'Failed to update user.');
+      });
+  }
+
+  // ---- Delete user ----
+  function deleteUser(username) {
+    if (!confirm('Delete user "' + username + '"? This cannot be undone.')) return;
+    fetch('/api/admin/users/' + encodeURIComponent(username), {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) loadUsers();
+        else showMsg('list-msg', 'error', data.error || 'Failed to delete user.');
+      });
+  }
+
+  // ---- Helpers ----
+  function showMsg(id, type, text) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = 'msg ' + type + ' visible';
+    setTimeout(() => el.classList.remove('visible'), 4000);
+  }
+
+  function escHtml(str) {
+    const d = document.createElement('div');
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+  }
+</script>
+</body>
+</html>
